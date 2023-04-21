@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Eğitim Bilgisi {{ isset($education) ? 'Ekleme' : 'Güncelleme' }}
+    Deneyim Bilgisi {{ isset($experience) ? 'Ekleme' : 'Güncelleme' }}
 @endsection
 
 @section('css')
@@ -10,51 +10,50 @@
 @section('content')
     <x-admin.page-header>
         <x-slot:title>
-            Eğitim Bilgisi
+            Deneyim Bilgisi
         </x-slot:title>
     </x-admin.page-header>
     <x-bootstrap.card>
         <x-slot:header>
-            Eğitim Bilgisi {{ isset($education) ? 'Ekleme' : 'Güncelleme' }}
+            Deneyim Bilgisi {{ isset($experience) ? 'Ekleme' : 'Güncelleme' }}
         </x-slot:header>
         <x-slot:body>
             <x-errors.display-error />
-            <form action="{{ isset($education) ? route('education-edit', ['id' => $education->id]) : route('education-create') }}"
+            <form action="{{ isset($experience) ? route('experience.edit', ['id' => $experience->id]) : route('experience-create') }}"
                   method="POST"
                   class="forms-sample"
-                  id="educationForm">
+                  id="experienceForm">
                 @csrf
                 <div class="form-group">
-                    <label for="unv_name">Üniversite Adı</label>
+                    <label for="profession">Meslek</label>
                     <input type="text"
-                           name="unv_name"
-                           id="unv_name"
+                           name="profession"
+                           id="profession"
                            class="form-control"
-                           placeholder="Üniversite Adı"
-                           value="{{ isset($education) ? $education->unv_name : ''}}"
+                           placeholder="Meslek"
+                           value="{{ isset($experience) ? $experience->profession : ''}}"
                            required
                     >
                 </div>
                 <div class="form-group">
-                    <label for="degree">Degree</label>
+                    <label for="task">Görev</label>
                     <input type="text"
-                           name="degree"
-                           id="degree"
+                           name="task"
+                           id="task"
                            class="form-control"
-                           placeholder="Degree"
-                           value="{{ isset($education) ? $education->degree : '' }}"
+                           placeholder="Görev"
+                           value="{{ isset($experience) ? $experience->task : '' }}"
                            required
                     >
                 </div>
                 <div class="form-group">
-                    <label for="branch">Bölüm</label>
+                    <label for="description">Açıklama</label>
                     <input type="text"
-                           name="branch"
-                           id="branch"
+                           name="description"
+                           id="description"
                            class="form-control"
-                           placeholder="Bölüm"
-                           value="{{ isset($education) ? $education->branch : '' }}"
-                           required
+                           placeholder="Açıklama"
+                           value="{{ isset($experience) ? $experience->description : '' }}"
                     >
                 </div>
                 <div class="form-group">
@@ -64,7 +63,7 @@
                            id="year"
                            class="form-control"
                            placeholder="Yıl"
-                           value="{{ isset($education) ? $education->year : ''}}"
+                           value="{{ isset($experience) ? $experience->year : ''}}"
                            required
                     >
                 </div>
@@ -75,19 +74,18 @@
                            id="order"
                            class="form-control"
                            placeholder="Sıralama"
-                           value="{{ isset($education) ? $education->order : '' }}"
-                           required
+                           value="{{ isset($experience) ? $experience->order : '' }}"
                     >
                 </div>
                 <div class="form-check form-check-flat">
                     <label class="form-check-label">
                     <input type="checkbox" name="status" id="form-check-label" class="form-check-input"
-                        {{ isset($education) && $education->status ? 'checked' : '' }} >
-                        Eğitim Bilgisi Aktif Olsun mu?
+                        {{ isset($experience) && $experience->status ? 'checked' : '' }} >
+                        Deneyim Bilgisi Aktif Olsun mu?
                     </label>
                 </div>
                 <button type="button" class="btn btn-success mr-2" id="btnSave">
-                    {{ isset($education) ? 'Güncelle' : 'Kaydet' }}
+                    {{ isset($experience) ? 'Güncelle' : 'Kaydet' }}
                 </button>
             </form>
         </x-slot:body>
@@ -97,37 +95,27 @@
 @section('js')
     <script>
 
-        let unvName = $('#unv_name');
-        let degree = $('#degree');
-        let branch = $('#branch');
+        let profession = $('#profession');
+        let task = $('#task');
         let year = $('#year');
 
         $(document).ready(function(){
 
            $('#btnSave').click(function () {
-               if (unvName.val() == null || unvName.val() === '')
+               if (profession.val() == null || profession.val() === '')
                {
                    Swal.fire({
                        title: "Uyarı",
-                       text: "Üniversite Adı boş geçilemez.",
+                       text: "Mesklek Adı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
                }
-               else if (degree.val() == null || degree.val() === '')
+               else if (task.val() == null || task.val() === '')
                {
                    Swal.fire({
                        title: "Uyarı",
-                       text: "Üniversite Degree boş geçilemez.",
-                       confirmButtonText: 'Tamam',
-                       icon: "info",
-                   });
-               }
-               else if (branch.val() == null || branch.val() === '')
-               {
-                   Swal.fire({
-                       title: "Uyarı",
-                       text: "Bölüm alanı boş geçilemez.",
+                       text: "Görev adı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
@@ -142,7 +130,7 @@
                    });
                }
                else {
-                   $('#educationForm').submit();
+                   $('#experienceForm').submit();
                }
            });
 

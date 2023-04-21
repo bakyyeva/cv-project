@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Eğitim Bilgisi {{ isset($education) ? 'Ekleme' : 'Güncelleme' }}
+    Beceri Bilgisi {{ isset($service) ? 'Ekleme' : 'Güncelleme' }}
 @endsection
 
 @section('css')
@@ -10,63 +10,53 @@
 @section('content')
     <x-admin.page-header>
         <x-slot:title>
-            Eğitim Bilgisi
+            Beceri Bilgisi
         </x-slot:title>
     </x-admin.page-header>
     <x-bootstrap.card>
         <x-slot:header>
-            Eğitim Bilgisi {{ isset($education) ? 'Ekleme' : 'Güncelleme' }}
+            Beceri Bilgisi {{ isset($service) ? 'Ekleme' : 'Güncelleme' }}
         </x-slot:header>
         <x-slot:body>
             <x-errors.display-error />
-            <form action="{{ isset($education) ? route('education-edit', ['id' => $education->id]) : route('education-create') }}"
+            <form action="{{ isset($service) ? route('service.edit', ['id' => $service->id]) : route('service.create') }}"
                   method="POST"
                   class="forms-sample"
-                  id="educationForm">
+                  id="serviceForm">
                 @csrf
                 <div class="form-group">
-                    <label for="unv_name">Üniversite Adı</label>
+                    <label for="name">Beceri</label>
                     <input type="text"
-                           name="unv_name"
-                           id="unv_name"
+                           name="name"
+                           id="name"
                            class="form-control"
-                           placeholder="Üniversite Adı"
-                           value="{{ isset($education) ? $education->unv_name : ''}}"
+                           placeholder="Beceri"
+                           value="{{ isset($service) ? $service->name : ''}}"
                            required
                     >
                 </div>
                 <div class="form-group">
-                    <label for="degree">Degree</label>
+                    <label for="description">Açıklama</label>
                     <input type="text"
-                           name="degree"
-                           id="degree"
+                           name="description"
+                           id="description"
                            class="form-control"
-                           placeholder="Degree"
-                           value="{{ isset($education) ? $education->degree : '' }}"
+                           placeholder="Açıklama"
+                           value="{{ isset($service) ? $service->description : '' }}"
                            required
                     >
                 </div>
                 <div class="form-group">
-                    <label for="branch">Bölüm</label>
+                    <label for="icon">Icon</label>
                     <input type="text"
-                           name="branch"
-                           id="branch"
+                           name="icon"
+                           id="icon"
                            class="form-control"
-                           placeholder="Bölüm"
-                           value="{{ isset($education) ? $education->branch : '' }}"
+                           placeholder="Icon"
+                           value="{{ isset($service) ? $service->icon : '' }}"
                            required
                     >
-                </div>
-                <div class="form-group">
-                    <label for="year">Yıl</label>
-                    <input type="text"
-                           name="year"
-                           id="year"
-                           class="form-control"
-                           placeholder="Yıl"
-                           value="{{ isset($education) ? $education->year : ''}}"
-                           required
-                    >
+                    <small><a href="https://fontawesome.com/" target="_blank">İcon bu siteden yükleyebilirsiniz</a></small>
                 </div>
                 <div class="form-group">
                     <label for="order">Sıralama</label>
@@ -75,19 +65,19 @@
                            id="order"
                            class="form-control"
                            placeholder="Sıralama"
-                           value="{{ isset($education) ? $education->order : '' }}"
+                           value="{{ isset($service) ? $service->order : '' }}"
                            required
                     >
                 </div>
                 <div class="form-check form-check-flat">
                     <label class="form-check-label">
                     <input type="checkbox" name="status" id="form-check-label" class="form-check-input"
-                        {{ isset($education) && $education->status ? 'checked' : '' }} >
-                        Eğitim Bilgisi Aktif Olsun mu?
+                        {{ isset($service) && $service->status ? 'checked' : '' }} >
+                        Beceri Bilgisi Aktif Olsun mu?
                     </label>
                 </div>
                 <button type="button" class="btn btn-success mr-2" id="btnSave">
-                    {{ isset($education) ? 'Güncelle' : 'Kaydet' }}
+                    {{ isset($service) ? 'Güncelle' : 'Kaydet' }}
                 </button>
             </form>
         </x-slot:body>
@@ -97,52 +87,52 @@
 @section('js')
     <script>
 
-        let unvName = $('#unv_name');
-        let degree = $('#degree');
-        let branch = $('#branch');
-        let year = $('#year');
+        let name = $('#name');
+        let description = $('#description');
+        let icon = $('#icon');
+        let order = $('#order');
 
         $(document).ready(function(){
 
            $('#btnSave').click(function () {
-               if (unvName.val() == null || unvName.val() === '')
+               if (name.val() == null || name.val() === '')
                {
                    Swal.fire({
                        title: "Uyarı",
-                       text: "Üniversite Adı boş geçilemez.",
+                       text: "Beceri adı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
                }
-               else if (degree.val() == null || degree.val() === '')
+               else if (description.val() == null || description.val() === '')
                {
                    Swal.fire({
                        title: "Uyarı",
-                       text: "Üniversite Degree boş geçilemez.",
+                       text: "Açıklama alanı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
                }
-               else if (branch.val() == null || branch.val() === '')
+               else if (icon.val() == null || icon.val() === '')
                {
                    Swal.fire({
                        title: "Uyarı",
-                       text: "Bölüm alanı boş geçilemez.",
+                       text: "Icon seçiniz.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
                }
-               else if (year.val() == null || year.val() === '')
+               else if (order.val() == null || order.val() === '')
                {
                    Swal.fire({
                        title: "Uyarı",
-                       text: "Yıl alanı boş geçilemez.",
+                       text: "Sıra numarası giriniz",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
                }
                else {
-                   $('#educationForm').submit();
+                   $('#serviceForm').submit();
                }
            });
 
