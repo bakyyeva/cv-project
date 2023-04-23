@@ -26,7 +26,7 @@ class EducationRequest extends FormRequest
             'degree' => ['required', 'max:255'],
             'branch' => ['required', 'max:255'],
             'year' => ['required', 'max:255'],
-            'order' => ['nullable'],
+            'order' => ['required'],
         ];
     }
 }

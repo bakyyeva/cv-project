@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('small_title_right');
             $table->string('sub_title_bottom');
             $table->string('small_title_bottom');
+            $table->string('files')->nullable();
             $table->timestamps();
         });
     }

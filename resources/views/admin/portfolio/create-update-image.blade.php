@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Portfolio Resim Bilgisi {{ isset($portfolio) ? 'Ekleme' : 'Güncelleme' }}
+    Portfolio Görseli {{ isset($portfolio) ? 'Güncelleme' : 'Ekleme' }}
 @endsection
 
 @section('css')
@@ -10,12 +10,12 @@
 @section('content')
     <x-admin.page-header>
         <x-slot:title>
-            Portfolio Resim Bilgisi
+            Portfolio Görseli
         </x-slot:title>
     </x-admin.page-header>
     <x-bootstrap.card>
         <x-slot:header>
-            Portfolio Resim Bilgisi {{ isset($portfolio) ? 'Ekleme' : 'Güncelleme' }}
+            Portfolio Görseli  {{ isset($portfolio) ? 'Güncelleme' : 'Ekleme' }}
         </x-slot:header>
         <x-slot:body>
             <x-errors.display-error />
@@ -40,7 +40,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="row">
+                <div class="form-group">
                     <label for="image" class="form-label m-t-sm">Portfolio Görseli</label>
                     <div class="col-6">
                         <a href="javascript:void(0)" id="portfolioImage" data-input="portfolio-image" data-preview="portfolioImg" class="btn btn-primary w-100">
@@ -58,14 +58,14 @@
                     <label class="form-check-label">
                         <input type="checkbox" name="feature_status" id="form-check-label" class="form-check-input"
                             {{ isset($portfolio) && $portfolio->feature_status ? 'checked' : '' }} >
-                        Portfolio Resmi Öne çıkarılsın mı?
+                        Portfolio Görseli Öne çıkarılsın mı?
                     </label>
                 </div>
                 <div class="form-check form-check-flat">
                     <label class="form-check-label">
                     <input type="checkbox" name="status" id="form-check-label" class="form-check-input"
                         {{ isset($portfolio) && $portfolio->status ? 'checked' : '' }} >
-                        Portfolio Resmi Aktif Olsun mu?
+                        Portfolio Görseli Aktif Olsun mu?
                     </label>
                 </div>
                 <button type="button" class="btn btn-success mr-2" id="btnSave">

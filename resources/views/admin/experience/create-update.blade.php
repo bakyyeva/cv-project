@@ -1,10 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Deneyim Bilgisi {{ isset($experience) ? 'Ekleme' : 'Güncelleme' }}
+    Deneyim Bilgisi {{ isset($experience) ? 'Güncelleme' : 'Ekleme' }}
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('assets/admin/assets/plugins/summernote/summernote-lite.min.css') }}">
 @endsection
 
 @section('content')
@@ -15,7 +16,7 @@
     </x-admin.page-header>
     <x-bootstrap.card>
         <x-slot:header>
-            Deneyim Bilgisi {{ isset($experience) ? 'Ekleme' : 'Güncelleme' }}
+            Deneyim Bilgisi {{ isset($experience) ? 'Güncelleme' : 'Ekleme' }}
         </x-slot:header>
         <x-slot:body>
             <x-errors.display-error />
@@ -47,14 +48,8 @@
                     >
                 </div>
                 <div class="form-group">
-                    <label for="description">Açıklama</label>
-                    <input type="text"
-                           name="description"
-                           id="description"
-                           class="form-control"
-                           placeholder="Açıklama"
-                           value="{{ isset($experience) ? $experience->description : '' }}"
-                    >
+                    <label for="description" class="form-label">Açıklama</label>
+                    <textarea name="description" id="description" class="m-b-sm">{!! isset($experience) ? $experience->description : "" !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="year">Yıl</label>
@@ -75,6 +70,7 @@
                            class="form-control"
                            placeholder="Sıralama"
                            value="{{ isset($experience) ? $experience->order : '' }}"
+                           required
                     >
                 </div>
                 <div class="form-check form-check-flat">
@@ -93,11 +89,13 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('assets/admin/assets/plugins/summernote/summernote-lite.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/text-editor.js') }}"></script>
     <script>
-
         let profession = $('#profession');
         let task = $('#task');
         let year = $('#year');
+        let order = $('#order');
 
         $(document).ready(function(){
 
@@ -125,6 +123,15 @@
                    Swal.fire({
                        title: "Uyarı",
                        text: "Yıl alanı boş geçilemez.",
+                       confirmButtonText: 'Tamam',
+                       icon: "info",
+                   });
+               }
+               else if (order.val() == null || order.val() === '')
+               {
+                   Swal.fire({
+                       title: "Uyarı",
+                       text: "Sıralama alanı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });

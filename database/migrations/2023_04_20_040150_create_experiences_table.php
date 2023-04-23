@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('profession');
             $table->string('task');
-            $table->string('description');
+            $table->mediumText('description');
             $table->string('year');
-            $table->integer('order')->default(0);
+            $table->integer('order');
             $table->boolean('status')->default(0);
+            $table->string('files')->nullable();
             $table->timestamps();
         });
     }

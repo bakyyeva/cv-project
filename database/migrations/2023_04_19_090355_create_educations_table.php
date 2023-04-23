@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('degree');
             $table->string('branch');
             $table->string('year');
-            $table->integer('order')->default(0);
+            $table->integer('order');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

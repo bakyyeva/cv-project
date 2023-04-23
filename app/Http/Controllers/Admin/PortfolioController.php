@@ -94,4 +94,5 @@ class PortfolioController extends Controller
             'portfolio_status' => $portfolio->status
         ])->setStatusCode(200);
     }
+
 }

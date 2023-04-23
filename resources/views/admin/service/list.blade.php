@@ -34,7 +34,16 @@
                     @foreach($services as $service)
                         <tr id="row-{{ $service->id }}">
                             <td>{{ $service->name }}</td>
-                            <td>{{ $service->description }}</td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button"
+                                        class="btn btn-primary lookDescription"
+                                        data-desc="{{ $service->description }}"
+                                        data-toggle="modal"
+                                        data-target="#description">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </td>
                             <td>{{ $service->icon }}</td>
                             <td>{{ $service->order }}</td>
                             <td>
@@ -64,6 +73,25 @@
             </x-bootstrap.table>
         </x-slot:body>
     </x-bootstrap.card>
+
+    <!-- Modal -->
+    <div class="modal fade" id="description" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Beceri Açıklaması</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
@@ -175,6 +203,11 @@
                     }
                 })
 
+            });
+
+            $('.lookDescription').click(function () {
+                let desc = $(this).data('desc');
+                $('#modalBody').html(desc);
             });
 
 

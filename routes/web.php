@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\PortfolioImageController;
+use App\Http\Controllers\Admin\PersonalInformationController;
 
 
 /*
@@ -30,6 +31,9 @@ Route::group(['prefix' => 'filemanager', 'middleware' => ['web']], function () {
 Route::get('/', function () {
     return view('layouts.admin');
 })->name('admin.home');
+
+Route::get('personal-information', [PersonalInformationController::class, 'create'])->name('personal-information.create');
+Route::post('personal-information', [PersonalInformationController::class, 'store']);
 
 Route::get('/education/list', [EducationController::class, 'index'])->name('education-list');
 Route::get('/education/create', [EducationController::class, 'create'])->name('education-create');

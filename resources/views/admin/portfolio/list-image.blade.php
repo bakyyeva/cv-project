@@ -35,7 +35,8 @@
                             <td>{{ $item->portfolio?->title}}</td>
                             <td>
                                 @if(!empty($item->image))
-                                    <img src="{{ asset($item->image) }}" style="max-height: 100px">
+                                    <img src="{{ asset('assets/admin/assets/images/faces/face2.jpg') }}" style="max-height: 100px">
+{{--                                    <img src="{{ asset($item->image) }}" style="max-height: 100px">--}}
                                 @endif
                             </td>
                             <td>

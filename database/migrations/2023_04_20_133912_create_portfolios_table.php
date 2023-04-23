@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('link')->nullable();
             $table->integer('order');
             $table->boolean('status');
+            $table->string('files')->nullable();
             $table->timestamps();
         });
     }

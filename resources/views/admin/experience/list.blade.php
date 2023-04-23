@@ -36,7 +36,16 @@
                         <tr id="row-{{ $experience->id }}">
                             <td>{{ $experience->profession }}</td>
                             <td>{{ $experience->task }}</td>
-                            <td>{{ $experience->description }}</td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button"
+                                        class="btn btn-primary lookDescription"
+                                        data-desc="{{ $experience->description }}"
+                                        data-toggle="modal"
+                                        data-target="#description">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </td>
                             <td>{{ $experience->year }}</td>
                             <td>{{ $experience->order }}</td>
                             <td>
@@ -66,6 +75,25 @@
             </x-bootstrap.table>
         </x-slot:body>
     </x-bootstrap.card>
+
+    <!-- Modal -->
+    <div class="modal fade" id="description" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deneyim Açıklaması</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
@@ -177,6 +205,11 @@
                     }
                 })
 
+            });
+
+            $('.lookDescription').click(function () {
+               let desc = $(this).data('desc');
+               $('#modalBody').html(desc);
             });
 
 

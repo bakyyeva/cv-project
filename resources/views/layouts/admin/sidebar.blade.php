@@ -3,12 +3,12 @@
         <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
                 <div class="profile-image">
-                    <img class="img-xs rounded-circle" src="{{ asset('assets/admin/assets/images/faces/face8.jpg') }}" alt="profile image">
+                    <img class="img-xs rounded-circle" src="{{ asset($data->image) }}" alt="profile image">
                     <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="profile-name">Uzuk Bakyyeva</p>
-                    <p class="designation">Admin</p>
+                    <p class="profile-name">{{ $data->full_name }}</p>
+{{--                    <p class="designation">Admin</p>--}}
                 </div>
             </a>
         </li>
@@ -17,6 +17,12 @@
             <a class="nav-link {{ Route::is('admin.home') ? 'active' : '' }} " href="{{ route('admin.home') }}">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Route::is('personal-information.create') ? 'active' : '' }} " href="{{ route('personal-information.create') }}">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Kişisel Bilgiler</span>
             </a>
         </li>
         <li class="nav-item">
@@ -114,10 +120,10 @@
                         <a class="nav-link" href="{{ route('portfolio.index') }}">Portfolio Listesi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('portfolio-image.create') }}">Portfolio Resim Ekleme Güncelleme</a>
+                        <a class="nav-link" href="{{ route('portfolio-image.create') }}">Portfolio Görseli Ekleme Güncelleme</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('portfolio-image.index') }}">Portfolio Resim Listesi</a>
+                        <a class="nav-link" href="{{ route('portfolio-image.index') }}">Portfolio Görseli Listesi</a>
                     </li>
                 </ul>
             </div>

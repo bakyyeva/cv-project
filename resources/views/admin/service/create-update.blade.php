@@ -1,10 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Beceri Bilgisi {{ isset($service) ? 'Ekleme' : 'Güncelleme' }}
+    Beceri Bilgisi {{ isset($service) ? 'Güncelleme' : 'Ekleme' }}
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('assets/admin/assets/plugins/summernote/summernote-lite.min.css') }}">
 @endsection
 
 @section('content')
@@ -15,7 +16,7 @@
     </x-admin.page-header>
     <x-bootstrap.card>
         <x-slot:header>
-            Beceri Bilgisi {{ isset($service) ? 'Ekleme' : 'Güncelleme' }}
+            Beceri Bilgisi {{ isset($service) ? 'Güncelleme' : 'Ekleme' }}
         </x-slot:header>
         <x-slot:body>
             <x-errors.display-error />
@@ -36,15 +37,8 @@
                     >
                 </div>
                 <div class="form-group">
-                    <label for="description">Açıklama</label>
-                    <input type="text"
-                           name="description"
-                           id="description"
-                           class="form-control"
-                           placeholder="Açıklama"
-                           value="{{ isset($service) ? $service->description : '' }}"
-                           required
-                    >
+                    <label for="service_description" class="form-label">Açıklama</label>
+                    <textarea name="description" id="service_description" class="m-b-sm">{!! isset($service) ? $service->description : "" !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="icon">Icon</label>
@@ -85,10 +79,11 @@
 @endsection
 
 @section('js')
-    <script>
+    <script src="{{ asset('assets/admin/assets/plugins/summernote/summernote-lite.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/text-editor.js') }}"></script>
 
+    <script>
         let name = $('#name');
-        let description = $('#description');
         let icon = $('#icon');
         let order = $('#order');
 
@@ -100,15 +95,6 @@
                    Swal.fire({
                        title: "Uyarı",
                        text: "Beceri adı boş geçilemez.",
-                       confirmButtonText: 'Tamam',
-                       icon: "info",
-                   });
-               }
-               else if (description.val() == null || description.val() === '')
-               {
-                   Swal.fire({
-                       title: "Uyarı",
-                       text: "Açıklama alanı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });

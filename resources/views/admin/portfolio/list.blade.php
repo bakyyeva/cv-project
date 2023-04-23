@@ -34,7 +34,16 @@
                     @foreach($portfolios as $portfolio)
                         <tr id="row-{{ $portfolio->id }}">
                             <td>{{ $portfolio->title }}</td>
-                            <td>{{ $portfolio->about }}</td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button"
+                                        class="btn btn-primary lookDescription"
+                                        data-desc="{{ $portfolio->about }}"
+                                        data-toggle="modal"
+                                        data-target="#description">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </td>
                             <td>{{ $portfolio->link }}</td>
                             <td>{{ $portfolio->order }}</td>
                             <td>
@@ -64,6 +73,25 @@
             </x-bootstrap.table>
         </x-slot:body>
     </x-bootstrap.card>
+
+    <!-- Modal -->
+    <div class="modal fade" id="description" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Portfolio Açıklaması</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
@@ -141,7 +169,7 @@
                             },
                             async: false,
                             success: function (data) {
-                               if (data.service_status)
+                               if (data.portfolio_status)
                                {
                                     self.removeClass('btn-danger');
                                     self.addClass('btn-success');
@@ -175,6 +203,11 @@
                     }
                 })
 
+            });
+
+            $('.lookDescription').click(function () {
+               let desc = $(this).data('desc');
+               $('#modalBody').html(desc);
             });
 
 

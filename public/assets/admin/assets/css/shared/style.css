@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------
  [Master Stylesheet]
 
-  Project:	Star Admin Free 
+  Project:	Star Admin Free
   Version:	3.5
 -------------------------------------------------------------------*/
 /*-------------------------------------------------------------------
@@ -7985,11 +7985,11 @@ pre {
   min-width: 32px;
   height: 32px; }
 
-.img-ss, .table td img:not(.thumb-image),
-.table th img:not(.thumb-image) {
-  width: 35px;
-  min-width: 35px;
-  height: 35px; }
+/*.img-ss, .table td img:not(.thumb-image),*/
+/*.table th img:not(.thumb-image) {*/
+/*  width: 35px;*/
+/*  min-width: 35px;*/
+/*  height: 35px; }*/
 
 .img-curved {
   border-radius: 10px; }
@@ -9567,9 +9567,9 @@ ul {
     white-space: nowrap;
     height: 35px;
     padding: 12px 15px; }
-    .table td img:not(.thumb-image),
-    .table th img:not(.thumb-image) {
-      border-radius: 100%; }
+    /*.table td img:not(.thumb-image),*/
+    /*.table th img:not(.thumb-image) {*/
+    /*  border-radius: 100%; }*/
     .table td img.thumb-image,
     .table th img.thumb-image {
       width: 50px;

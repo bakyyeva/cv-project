@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Eğitim Bilgisi {{ isset($education) ? 'Ekleme' : 'Güncelleme' }}
+    Eğitim Bilgisi {{ isset($education) ? 'Güncelleme' : 'Ekleme' }}
 @endsection
 
 @section('css')
@@ -15,7 +15,7 @@
     </x-admin.page-header>
     <x-bootstrap.card>
         <x-slot:header>
-            Eğitim Bilgisi {{ isset($education) ? 'Ekleme' : 'Güncelleme' }}
+            Eğitim Bilgisi {{ isset($education) ? 'Güncelleme' : 'Ekleme' }}
         </x-slot:header>
         <x-slot:body>
             <x-errors.display-error />
@@ -101,6 +101,7 @@
         let degree = $('#degree');
         let branch = $('#branch');
         let year = $('#year');
+        let order = $('#order');
 
         $(document).ready(function(){
 
@@ -137,6 +138,15 @@
                    Swal.fire({
                        title: "Uyarı",
                        text: "Yıl alanı boş geçilemez.",
+                       confirmButtonText: 'Tamam',
+                       icon: "info",
+                   });
+               }
+               else if (order.val() == null || order.val() === '')
+               {
+                   Swal.fire({
+                       title: "Uyarı",
+                       text: "Siralama alanı boş geçilemez.",
                        confirmButtonText: 'Tamam',
                        icon: "info",
                    });
