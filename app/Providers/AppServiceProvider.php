@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\PersonalInformation;
+use App\Models\SocialMedia;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,9 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['layouts.admin'], function ($view){
+        View::composer(['layouts.admin', 'front.*'], function ($view){
             $data = PersonalInformation::first();
-            $view->with('data', $data);
+            $socialMedia = SocialMedia::all();
+            $view->with('data', $data,)->with( 'socialMedia', $socialMedia);
         });
     }
 }

@@ -22,6 +22,7 @@
             <x-errors.display-error />
             <form action=""
                   method="POST"
+                  enctype="multipart/form-data"
                   class="forms-sample">
                 @csrf
                 <div class="form-group">
@@ -212,7 +213,7 @@
                 </div>
                 <div class="form-group">
                     <label for="cv" class="form-label m-t-sm">Cv</label>
-                    <input type="file" name="cv" id="cv" class="form-control">
+                    <input type="file" name="cv" id="cv" class="form-control" value="{{ isset($data) ? $data->cv : '' }}">
                 </div>
                 <button type="submit" class="btn btn-success mr-2" id="btnSave">
                     {{ isset($data) ? 'Güncelle' : 'Kaydet' }}

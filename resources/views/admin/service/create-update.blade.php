@@ -50,7 +50,7 @@
                            value="{{ isset($service) ? $service->icon : '' }}"
                            required
                     >
-                    <small><a href="https://fontawesome.com/" target="_blank">İcon bu siteden yükleyebilirsiniz</a></small>
+                    <small><a href="https://fontawesome.com/v5/search" target="_blank">İcon bu siteden yükleyebilirsiniz</a></small>
                 </div>
                 <div class="form-group">
                     <label for="order">Sıralama</label>

@@ -12,8 +12,8 @@ class PortfolioImageController extends Controller
 {
     public function index()
     {
-        $portfolios = PortfolioImage::all();
-
+        $portfolios = PortfolioImage::query()->with('portfolio')->get();
+//dd($portfolios);
         return view('admin.portfolio.list-image', compact('portfolios'));
     }
 

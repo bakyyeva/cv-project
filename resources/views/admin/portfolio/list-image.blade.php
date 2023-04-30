@@ -32,11 +32,11 @@
                 <x-slot:rows>
                     @foreach($portfolios as $item)
                         <tr id="row-{{ $item->id }}">
+{{--                            @dd($item->portfolio);--}}
                             <td>{{ $item->portfolio?->title}}</td>
                             <td>
                                 @if(!empty($item->image))
-                                    <img src="{{ asset('assets/admin/assets/images/faces/face2.jpg') }}" style="max-height: 100px">
-{{--                                    <img src="{{ asset($item->image) }}" style="max-height: 100px">--}}
+                                    <img src="{{ asset($item->image) }}" style="max-height: 100px">
                                 @endif
                             </td>
                             <td>

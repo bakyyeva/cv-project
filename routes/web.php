@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\PortfolioImageController;
 use App\Http\Controllers\Admin\PersonalInformationController;
+use App\Http\Controllers\Front\FrontController;
 
 
 /*
@@ -33,7 +34,7 @@ Route::get('/', function () {
 })->name('admin.home');
 
 Route::get('personal-information', [PersonalInformationController::class, 'create'])->name('personal-information.create');
-Route::post('personal-information', [PersonalInformationController::class, 'store']);
+Route::post('personal-information', [PersonalInformationController::class, 'update']);
 
 Route::get('/education/list', [EducationController::class, 'index'])->name('education-list');
 Route::get('/education/create', [EducationController::class, 'create'])->name('education-create');
@@ -84,3 +85,9 @@ Route::delete('portfolio-images/delete', [PortfolioImageController::class, 'dele
 Route::patch('portfolio-images/change-status', [PortfolioImageController::class, 'changeStatus'])->name('portfolio-image.change-status');
 Route::patch('portfolio-images/change-feature-status', [PortfolioImageController::class, 'changeFeatureStatus'])->name('portfolio-image.change-feature-status');
 
+Route::get('/index', [FrontController::class, 'index'])->name('front.index');
+Route::get('/resume', [FrontController::class, 'resume'])->name('front.resume');
+Route::get('/front/portfolios', [FrontController::class, 'portfolios'])->name('front.portfolios');
+Route::get('/portfolios/{id}', [FrontController::class, 'portfolioDetail'])->name('front.portfolioDetail')->whereNumber('id');
+Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
+Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
